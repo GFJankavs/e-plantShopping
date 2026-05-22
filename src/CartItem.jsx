@@ -42,7 +42,9 @@ const CartItem = ({ onContinueShopping }) => {
   const calculateTotalCost = (item) => {
     const { cost, quantity } = item;
 
-    return parseFloat(cost.substring(1)) * quantity;
+    const costNumber = parseFloat(cost.substring(1));
+
+    return costNumber * quantity;
   };
 
   return (

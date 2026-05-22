@@ -10,6 +10,8 @@ function ProductList({ onHomeClick }) {
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
 
+    console.log("ADDED TO CART", addedToCart);
+
     const handleAddToCart = (product) => {
         dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
 
@@ -304,12 +306,13 @@ function ProductList({ onHomeClick }) {
                             <div className="product-title">{plant.name}</div> {/* Display plant name */}
                             {/* Display other plant details like description and cost */}
                             <div className="product-description">{plant.description}</div> {/* Display plant description */}
-                            <div className="product-cost">${plant.cost}</div> {/* Display plant cost */}
+                            <div className="product-cost">{plant.cost}</div> {/* Display plant cost */}
                             <button
-                                className="product-button"
+                                className={`product-button ${addedToCart[plant.name] ? 'added-to-cart' : ''}`}
                                 onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+                                disabled={!!addedToCart[plant.name]}
                             >
-                                Add to Cart
+                                {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
                             </button>
                             </div>
                         ))}
